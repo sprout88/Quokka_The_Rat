@@ -42,6 +42,11 @@ print('Connected by', addr)
 while True:
     cmd = input('$')
     if(len(cmd)>0):  #빈 버퍼를 보내면 상대가 받지못한다. 그러면 무한 교착상태 발생
+        ##Quick command
+        if(cmd==":cdkakao"):
+            cmd="cd C:\Program Files (x86)\Kakao\KakaoTalk"
+        if(cmd==":injkakao"):
+        ##
         conn.send(cmd.encode())
         try:
             print("wait for client message...")
