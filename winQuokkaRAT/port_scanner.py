@@ -62,15 +62,20 @@ while(True):
         os.system('pause')
     if(user_input=="2"):
         print("you choose 2...")
-        start_input = int(input("input start port num :"))
-        end_input = int(input("input end port num :"))
-        print_all_free_port(start_input,end_input)
-        
+        try:
+            start_input = int(input("input start port num :"))
+            end_input = int(input("input end port num :"))
+            print_all_free_port(start_input,end_input)
+        except Exception as e:
+            print("wrong integer...")
         os.system('pause')
     if(user_input=="3"):
         print("you choose 3...")
-        start_input = int(input("input start port num :"))
-        end_input = int(input("input end port num :"))
-        print_all_port(start_input,end_input)
+        try:
+            start_input = int(input("input start port num :"))
+            end_input = int(input("input end port num :"))
+            print_all_port(start_input,end_input)
+        except Exception as e:
+            print("wrong integer...")
         
         

@@ -16,6 +16,13 @@ os.system('pause') #ascii 가 깨지지 않도록 interrupt
 
 ascii_quokka.print_ascii(VERSION)
 
+while(True):
+    port_input =input("input port to listen :")
+    if(port_input==''):
+        continue
+    else:
+        PORT = int(port_input)
+    break
 
 def bind_listen(sock,host,port):
     try:
