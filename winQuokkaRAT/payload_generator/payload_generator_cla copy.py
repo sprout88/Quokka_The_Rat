@@ -3,7 +3,7 @@ import argparse
 
 DEBUG = False
 UAC_BYPASS = True
-SRC_FILE = "winQuokka_payload_input_test.py"
+SRC_FILE = "gen_src.py"
 ### argparser
 parser = argparse.ArgumentParser()
 

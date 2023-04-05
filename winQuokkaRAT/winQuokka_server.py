@@ -5,7 +5,7 @@ import ascii_quokka as ascii_quokka
 import sys
 
 
-VERSION="develop 1.0 , for education by jeho"
+VERSION="develop 2.0 , for education by jeho"
 
 HOST = '0.0.0.0' # i don't know my ip, router!
 PORT = 9001 #free port of host

