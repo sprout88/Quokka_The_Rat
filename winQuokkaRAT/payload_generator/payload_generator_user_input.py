@@ -45,7 +45,7 @@ while(True):
 
 ## input host_port
 while(True):
-    host_port = input("input host_port (default=127.0.0.1) :")
+    host_port = input("input host_port (default=9001) :")
     if(host_port==''):
         host_port=DEFAULT_HOST_PORT
         print(f"default host_port choosed : {DEFAULT_HOST_IP}")
