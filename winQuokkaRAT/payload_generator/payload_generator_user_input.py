@@ -1,5 +1,4 @@
 import os
-import argparse
 
 DEBUG = False
 UAC_BYPASS = True

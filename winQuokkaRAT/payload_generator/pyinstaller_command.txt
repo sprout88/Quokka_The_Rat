@@ -1,0 +1,11 @@
+pyinstaller -F -w --noconsole --icon=./test.ico ./{src_input} --name {payload_output.exe}
+
+pyinstaller -F -w --noconsole --icon=kakaotalk.ico gen_src.py --name payload_output.exe
+
+rmdir /s /q build&&cd dist&&mv payload_output.exe ..&&rmdir /s /q dist&&del payload_output.spec
+
+
+###
+debug 가 True 여도 pyinstaller를 거치면 background mode로 실행됨(--noconsole 옵션)
+# F : one file 로 exe 하나만 생성
+# w : 검은콘솔창을 띄우지 않음
