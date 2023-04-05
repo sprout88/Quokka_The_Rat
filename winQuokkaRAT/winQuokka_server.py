@@ -73,7 +73,7 @@ def file_transfer_mode(conn_param):
             print("fileinfo recved!!!")
             print(f"fileinfo : {recved}")
 
-            fileinfostr, file_name, file_size = recved.split() #file_info recv
+            fileinfostr, file_name, file_size = recved.split(":") #file_info recv
 
             file_size=int(file_size)
 

