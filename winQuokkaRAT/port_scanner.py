@@ -53,6 +53,8 @@ while(True):
     print(f"1. available port random({PREFIX_PORT_START}~{PREFIX_PORT_END}) return")
     print("2. print all free port by range")
     print("3. print all free/binded port by range")
+    print("4. check specific port")
+
 
     user_input = input(":")
     if(user_input=="1"):
@@ -77,5 +79,16 @@ while(True):
             print_all_port(start_input,end_input)
         except Exception as e:
             print("wrong integer...")
+    if(user_input=="4"):
+        print("you choose 4...")
+        try:
+            check_port = int(input("input port num to check :"))
+            if(is_port_available(check_port)):
+                print(f"port {check_port} is FREE!")
+            else:
+                print(f"port {check_port} is BINDED...")
+        except Exception as e:
+            print("wrong integer...")
+        os.system('pause')
         
         

