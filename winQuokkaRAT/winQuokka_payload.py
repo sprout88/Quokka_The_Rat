@@ -38,10 +38,10 @@ def file_send(conn_param,file_path_param):
         with open(file_path_param,'rb') as f:
             debug_print(f"file opened")
             file_content = f.read()
-            file_name = file_path_param.split('/')[-1]
+            file_name = file_path_param.split('\\')[-1]
             file_size = len(file_content)
-            send_s(conn_param,f'fileinfo {file_name}{file_size}')
-            debug_print("file_info sended")
+            send_s(conn_param,f'fileinfo {file_name} {file_size}')
+            debug_print(f"file_info sended : fileinfo {file_name} {file_size}")
             conn_param.sendall(file_content)
             debug_print(f"file_content sended")
     except Exception as e:

