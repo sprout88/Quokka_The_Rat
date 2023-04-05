@@ -89,7 +89,10 @@ def file_transfer_mode(conn_param):
                 file_content+=data_segment
 
             print("downloaded binary >>")
-            print(file_content.decode()) #받은 파일 보기
+            try:
+                print(file_content.decode()) #받은 파일 보기
+            except:
+                print("file is not text...")
             print(">>>>>>>>>>>>>>>>>>>>>")
 
             # 파일 저장 
@@ -152,6 +155,9 @@ while True: # re loop while
             elif(cmd[:2]=="ft"):
                 if(file_transfer_mode(conn)==0): # file_transfer_mode 를 끄는지 검사
                     continue # file_transfer_mode 를 끄면 re loop while
+            elif(cmd[:4]=="term"):
+                print("Remote Terminate Executed")
+                send_and_recv(conn,cmd)
             else:
                 send_and_recv(conn,cmd)
             
