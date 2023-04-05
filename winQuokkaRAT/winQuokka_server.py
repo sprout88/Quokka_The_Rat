@@ -43,7 +43,7 @@ def send_and_recv(conn_param,message): # socket send safe function. if send empt
         return 0
     conn_param.send(message.encode())
     print("wait for client message...")
-    recved = conn_param.recv(BUFFER_SIZE).decode()
+    recved = conn_param.recv(BUFFER_SIZE).decode('utf-8')
     print(recved)
     return recved
 
@@ -117,9 +117,19 @@ while(True):
         break
     else:
         break
+
+
+
 my_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-bind_listen(my_sock,HOST,PORT)
+while(True):
+    try:
+        bind_listen(my_sock,HOST,PORT)
+        break
+    except Exception as e:
+        print(e)
+        print(f"port 사용중 : {PORT}")
+
 
 conn, addr = my_sock.accept()
 print('\n')

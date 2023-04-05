@@ -31,7 +31,7 @@ def send_s(conn_param,message): # safe send socket. restrict null message
     if(message==''):
         print("null message error...") #빈 패킷을 보내지않도록 처리
         return 0
-    conn_param.send(message.encode())
+    conn_param.send(message.encode('utf-8'))
 
 def file_send(conn_param,file_path_param):
     try:
