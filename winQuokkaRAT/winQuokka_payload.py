@@ -2,8 +2,8 @@ import os,socket,subprocess
 import time,sys
 import win32com.shell.shell as shell
 
-DEBUG=True
-UAC_BYPASS=False
+DEBUG=False
+UAC_BYPASS=True
 ### UAC to get Admins
 
 def debug_print(str):

