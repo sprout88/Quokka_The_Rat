@@ -1,0 +1,6 @@
+시작프로그램에 자기자신 등록
+REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "NameOfProgram" /t REG_SZ /d "C:\Path\To\Program.exe"
+REG ADD HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "kakaoUpdate" /t REG_SZ /d "C:\Users\kyura\Downloads\kakaotalk_update_backdoor_9001\kakaoUpdate.exe"
+
+해제
+REG DELETE HKCU\Software\Microsoft\Windows\CurrentVersion\Run /v "NameOfProgram" /f
