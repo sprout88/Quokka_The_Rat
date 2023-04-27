@@ -37,7 +37,11 @@ def send_s(conn_param,message): # safe send socket. restrict null message
     if(message==''):
         print("null message error...") #빈 패킷을 보내지않도록 처리
         return 0
-    conn_param.send(message.encode('utf-8'))
+    try:
+        conn_param.send(message.encode('utf-8'))
+    except Exception as e:
+        debug_print(e)
+        conn_param.send(message.encode('cp949'))
 
 def file_send(conn_param,file_path_param):
     try:
@@ -117,7 +121,7 @@ while True:
             while True:
                 # recv server command
                 debug_print("wait for server message...")
-                server_cmd = conn.recv(10000).decode() 
+                server_cmd = conn.recv(10000).decode()
                 debug_print(f"command recv success!! : {server_cmd}") #recv success
                 
                 # if recved command, if command is special, handle wheather its special command

@@ -88,13 +88,6 @@ def file_transfer_mode(conn_param):
                     break
                 file_content+=data_segment
 
-            print("downloaded binary >>")
-            try:
-                print(file_content.decode()) #받은 파일 보기
-            except:
-                print("file is not text...")
-            print(">>>>>>>>>>>>>>>>>>>>>")
-
             # 파일 저장 
             try:
                 file_name_saved = f"{file_name}"
