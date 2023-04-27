@@ -81,9 +81,9 @@ def file_transfer_mode(conn_param):
             print(f"file_size : {file_size}")
 
             file_content=b'' # file 조각을 모을 바이너리형 선언
-
+ 
             while len(file_content)<file_size:
-                data_segment = conn.recv(1024)
+                data_segment = conn.recv(30000)
                 if not data_segment:
                     break
                 file_content+=data_segment

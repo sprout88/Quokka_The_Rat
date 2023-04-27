@@ -1,11 +1,6 @@
 pyinstaller -F -w --noconsole --clean --icon=./test.ico ./{src_input} --name {payload_output.exe}
 
-pyinstaller -F -w --noconsole --clean --icon=kakaotalk.ico gen_src.py --name payload_output.exe
-pyinstaller -F -w --noconsole --clean --icon=word.ico gen_src.py --name payload_output.exe
-pyinstaller -F -w --noconsole --clean --icon=excel.ico gen_src.py --name payload_output.exe
-pyinstaller -F -w --noconsole --clean --icon=matlab.ico gen_src.py --name payload_output.exe
-pyinstaller -F -w --noconsole --clean --icon=photoshop.ico gen_src.py --name payload_output.exe
-
+pyinstaller -F -w --noconsole --clean --icon=icon.ico gen_src.py --name payload_output.exe
 
 rmdir /s /q build&cd dist&move payload_output.exe ..&rmdir /s /q dist
 cd..&del payload_output.exe.spec
