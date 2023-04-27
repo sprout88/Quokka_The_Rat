@@ -37,7 +37,7 @@ def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def send_and_recv(conn_param,message): # socket send safe function. if send empty buffer, server cannot get. so should be altered
-    BUFFER_SIZE=10000
+    BUFFER_SIZE=50000
     if(message==''):
         print("null message error...") #빈 패킷을 보내지않도록 처리
         return 0
@@ -83,7 +83,7 @@ def file_transfer_mode(conn_param):
             file_content=b'' # file 조각을 모을 바이너리형 선언
  
             while len(file_content)<file_size:
-                data_segment = conn.recv(30000)
+                data_segment = conn.recv(50000)
                 if not data_segment:
                     break
                 file_content+=data_segment
