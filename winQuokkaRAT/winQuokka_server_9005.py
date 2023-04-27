@@ -8,7 +8,7 @@ import sys
 VERSION="develop 2.0 , for education by jeho"
 
 HOST = '0.0.0.0' # i don't know my ip, router!
-PORT = 9002 #free port of host
+PORT = 9005 #free port of host
 CUSTUM_PORT = False # user enter to set port
 
 print(VERSION)
